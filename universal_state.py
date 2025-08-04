@@ -212,10 +212,10 @@ def expenses(content_block):
     block = content_block['DESGLOSE DE MOVIMIENTOS']
     # print(block)
     payment_index = g.locate_codes(r"TARJETA (t|A|a|T)", block)
-    print(payment_index)
+    # print(payment_index)
     payment_cats = set([block[k] for k in payment_index])
     payment_index.append(len(block))
-    print(payment_cats)
+    # print(payment_cats)
     payment_moves = {pc: [] for pc in payment_cats}
     # print("PAY", payment_moves)
     for k in range(len(payment_index) - 1):
@@ -242,14 +242,16 @@ def expenses(content_block):
                 payment_moves[con_keys] = payment_moves[pay_keys]
                 del payment_moves[pay_keys]
                 break
-    msi_pattern = r"\d{2}-\w{3}-\d{2}"
-    exp_pattern = r"\d{2}-\w{3}-\d{2} \d{2}-\w{3}-\d{2}"
+    msi_pattern = r"\d{2}-\w{3}-\d{2,4}"
+    exp_pattern = r"\d{2}-\w{3}-\d{2,4} \d{2}-\w{3}-\d{2,4}"
     raw_data = {}
     for key in payment_moves.keys():
         data = []
         for line in payment_moves[key]:
             pattern = msi_pattern if re.search(r"SIN INTERESES", key) else exp_pattern
+            print(pattern)
             if re.search(pattern, line):
+                print(line)
                 data.append(line)
         raw_data[key] = data
     msi_df = pd.DataFrame(columns=["Tipo Tarjeta", "Número Tarjeta", "Fecha", "Descripción", "Monto",
@@ -257,9 +259,12 @@ def expenses(content_block):
     exp_df = pd.DataFrame(columns=["Tipo Tarjeta", "Número Tarjeta", "Fecha Operación", "Fecha Cargo",
                                    "Descripción", "Monto"])
     raw_keys = list(raw_data.keys())
+    print(raw_data)
     for rwk in raw_keys:
         card_mod, card_type, card_number = rwk.split("-")
         content = raw_data[rwk]
+        # print(rwk, content)
+
         if re.search("MESES SIN INTERESES", rwk):
             # print("MESES SIN INTERESES")
             df = msi_df.copy()
@@ -283,9 +288,10 @@ def expenses(content_block):
                 df.loc[s] = [card_type, card_number, date, description] + amounts + [steps, rates]
             msi_df = pd.concat([msi_df, df], ignore_index=True)
         else:
-            # print("PAGO A MESES")
+            # print("NO PAGO A MESES")
             df = exp_df.copy()
             for s, line in enumerate(content):
+                # print(line)
                 desc_start = re.search(exp_pattern, line).span()[1]
                 desc_end = line.index("$")
                 description = line[desc_start:desc_end]
@@ -299,12 +305,12 @@ def expenses(content_block):
 universal_tests = pd.read_csv("UniversalState.csv")
 folder_test = "Banks\\BBVA\\Credito"
 
+
 for select_file in range(universal_tests.shape[0]):
     file = os.path.join(folder_test, universal_tests.loc[select_file, "filename"])
     state_sections, bank_state_blocks = config_state_bank(file)
-    print(state_sections)
     if 'DESGLOSE DE MOVIMIENTOS' in state_sections.keys():
-        print(universal_tests.loc[select_file, "filename"])
+        # print(universal_tests.loc[select_file, "filename"])
         exp_df, msi_df = expenses(bank_state_blocks)
-        msi_df.to_excel(f"{select_file}_MSI.xlsx")
-        exp_df.to_excel(f"{select_file}_EXP.xlsx")
+        msi_df.to_csv(f"{select_file}_MSI.csv")
+        exp_df.to_csv(f"{select_file}_EXP.csv")
