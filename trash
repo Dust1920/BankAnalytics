@@ -1,0 +1,44 @@
+
+"""
+    date_format = r"\d{2}-\w{3}-\d{2}"
+dates = []
+for k, line in enumerate(content):
+    s = re.search(date_format, line)
+    if s is not None:
+        dates.append(k)
+for d in dates:
+    print(content[d])
+"""
+
+
+"""
+folder = "Banks"
+subfolders = os.listdir(folder)
+print(subfolders)
+sub_i = np.random.choice(subfolders)
+subpath = os.path.join(folder, sub_i)
+file_type = np.random.choice(os.listdir(subpath))
+subsubpath = os.path.join(subpath, file_type)
+print(sub_i, file_type)
+print(subsubpath)
+print(is_universal(subsubpath))
+
+f = general_info.files
+u = os.path.join(ginfo.test_folder, f[0])
+
+print(u)
+print(is_universal(u))
+"""
+
+"""
+universal_df = pd.DataFrame(index=range(len(ginfo.files)), columns=["Bank", "State", "filename"])
+for k in range(len(ginfo.files)):
+    index_file = k
+    select_file, selectpath = ginfo.files[index_file], os.path.join(ginfo.test_folder, ginfo.files[index_file])
+    STATE = manager.state_bank(selectpath)
+    test_pages = manager.read_pages(STATE, [0, 1])
+    universal = is_universal(selectpath)
+    universal_df.loc[k] = [manager.find_bak(test_pages), universal, select_file]
+
+print(universal_df[universal_df["State"] == 1].to_csv("UniversalState.csv"))
+"""

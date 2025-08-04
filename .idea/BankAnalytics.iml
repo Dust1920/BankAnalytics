@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Banks/BBVA" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/HSBC" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/INVEX" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/KLAR" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/NU" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/PLATA" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/SEARS" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/STORI" />
+      <excludeFolder url="file://$MODULE_DIR$/Banks/UALA" />
+    </content>
+    <orderEntry type="jdk" jdkName="DataWork" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
