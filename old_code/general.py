@@ -12,7 +12,6 @@ def rename_dict(old_names, new_names, dic: dict):
 
 def locate_codes(code, content):
     """
-
     :param code:
     :param content:
     :return:
@@ -21,6 +20,8 @@ def locate_codes(code, content):
     code_index = []
     for k, line in enumerate(content):
         s = re.search(code, line.upper())
+        print(k, code, line)
         if s is not None:
+            print(k, line.upper(), "---", code, s)
             code_index.append(k)
     return code_index

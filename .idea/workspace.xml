@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8514cc40-2dc3-48e3-9cb9-ca5783678bbb" name="Changes" comment="BBVA">
+      <change afterPath="$PROJECT_DIR$/bank_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bank_tools.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old_code/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old_code/main_dash.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/universal_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/universal_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bbva_trash.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/general.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_code/general.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_code/general_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_code/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trash" beforeDir="false" afterPath="$PROJECT_DIR$/old_code/trash" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/universal_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/old_code/universal_state.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +45,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Dust1920&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dust1920/BankAnalytics.git&quot;,
+    &quot;accountId&quot;: &quot;d9f26af6-2dce-4db7-995f-28f7ece41845&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -51,6 +74,8 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.bbva.executor": "Run",
     "Python.bbva_credit.executor": "Run",
+    "Python.general.executor": "Run",
+    "Python.general_info.executor": "Run",
     "Python.main.executor": "Run",
     "Python.manager.executor": "Run",
     "Python.universal_state.executor": "Run",
@@ -73,8 +98,10 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Programación\Python\BankAnalytics" />
-      <recent name="D:\Programación\Python\BankAnalytics\Banks\HSBC 2Now\Credito" />
-      <recent name="D:\Programación\Python\BankAnalytics\Banks\BBVA" />
+      <recent name="D:\Programación\Python\BankAnalytics\old_code" />
+      <recent name="D:\Programación\Python\BankAnalytics\Banks\INVEX\Credito" />
+      <recent name="D:\Programación\Python\BankAnalytics\Banks\KLAR\Credito" />
+      <recent name="D:\Programación\Python\BankAnalytics\Banks\NU\Credito" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -110,7 +137,8 @@
       <workItem from="1753846233386" duration="26000" />
       <workItem from="1754108167376" duration="33240000" />
       <workItem from="1754217796481" duration="7233000" />
-      <workItem from="1754270304508" duration="18724000" />
+      <workItem from="1754270304508" duration="20859000" />
+      <workItem from="1754337418835" duration="15566000" />
     </task>
     <task id="LOCAL-00001" summary="BBVA">
       <option name="closed" value="true" />
@@ -120,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754303703884</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="BBVA">
+      <option name="closed" value="true" />
+      <created>1754304816246</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1754304816246</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,10 +168,12 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/main_py$bbva.coverage" NAME="bbva Coverage Results" MODIFIED="1754116506727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1754108239252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/main_py$universal_state.coverage" NAME="universal_state Coverage Results" MODIFIED="1754304592840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1754377764760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/main_py$general_info.coverage" NAME="general_info Coverage Results" MODIFIED="1754339863835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/main_py$universal_state.coverage" NAME="universal_state Coverage Results" MODIFIED="1754376687376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/main_py$bbva_credit.coverage" NAME="bbva_credit Coverage Results" MODIFIED="1752561265615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BankAnalytics$bbva.coverage" NAME="bbva Coverage Results" MODIFIED="1749119144393" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/main_py$manager.coverage" NAME="manager Coverage Results" MODIFIED="1754119994584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/main_py$general.coverage" NAME="general Coverage Results" MODIFIED="1754366583643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -23,7 +23,7 @@ def read_pdf(select_year, select_month, select_bank, select_card):
     :param select_card:
     :return:
     """
-    folder = os.path.join("Banks", select_bank, select_card)  # Folder
+    folder = os.path.join("../Banks", select_bank, select_card)  # Folder
     files = os.listdir(folder)  # Estados de Cuentas
     selected_file = ""
     for f in files:
@@ -70,7 +70,7 @@ def find_bak(sample):
     stop = 0
     for ab in all_baks:
         for lines in sample:
-            s = re.search(ab, lines)
+            s = re.search(ab, lines.upper())
             if s is not None:
                 stop = 1
                 break

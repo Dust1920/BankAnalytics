@@ -5,8 +5,9 @@ import manager
 import re
 import general_info as ginfo
 import general as g
-import os
 import pandas as pd
+import pdfplumber
+
 
 universal_pattern = "TU PAGO REQUERIDO ESTE PERIODO"
 
@@ -18,7 +19,7 @@ def is_universal(select_path):
     :return:
     """
 
-    state = manager.state_bank(select_path)
+    state = pdfplumber.open(select_path)
     test_pages = manager.read_pages(state, [0, 1])
     universal = 0
     for line in test_pages:
@@ -122,22 +123,27 @@ def config_state_bank(path):
     """
     pdf = manager.state_bank(path)
     content = first_clean(pdf)  # Primera Limpieza de datos
+    # print(content)
+    end_first_page = g.locate_codes("PROGRAMAS? DE BENEFICIOS DE LA TARJETA", content)
 
-    end_first_page = g.locate_codes("PROGRAMA DE BENEFICIOS DE LA TARJETA", content)
     bank_state_not_first_page = content[end_first_page[0]:]
     # print(file)
     # print(BANK_STATE_NOT_FIRST_PAGE)
-
+    # print(bank_state_not_first_page)
     sections = []
+    # print(bank_state_not_first_page)
     for k, line in enumerate(bank_state_not_first_page):
         if not all(char.isalpha() or char.isspace() for char in line):
+            # print(k, line)
             continue
         if line == "BBVA BBVA":  # Fallo de Generación BBVA
             continue
+        # print(k, line)
         if line == line.upper():
             sections.append(k)
-
+    # print(sections)
     state_sections = {bank_state_not_first_page[s]: s for s in sections}
+    # print(state_sections)
     sections.append(len(bank_state_not_first_page))
 
     # print(state_sections)
@@ -205,26 +211,19 @@ def dist_payments(content_block):
 # if 'DISTRIBUCIÓN DE TU ÚLTIMO PAGO' in state_sections.keys():
 
 
-#
-
-
-def expenses(content_block):
+def expenses_bbva(content_block, **kwargs):
     block = content_block['DESGLOSE DE MOVIMIENTOS']
-    # print(block)
+    mods = ["MESES SIN INTERESES", "NO A MESES"]
     payment_index = g.locate_codes(r"TARJETA (t|A|a|T)", block)
-    # print(payment_index)
     payment_cats = set([block[k] for k in payment_index])
     payment_index.append(len(block))
-    # print(payment_cats)
     payment_moves = {pc: [] for pc in payment_cats}
-    # print("PAY", payment_moves)
     for k in range(len(payment_index) - 1):
         q = block[payment_index[k]: payment_index[k + 1]]
         payment_moves[q[0]] += q
     pay_mov_keys = list(payment_moves.keys())
-    # print("A", pay_mov_keys)
     clasf_cards = pd.DataFrame(index=range(len(pay_mov_keys)), columns=["Modalidad", "Tipo", "Numero"])
-    mods = ["MESES SIN INTERESES", "NO A MESES"]
+
     for m in mods:
         for k, v in enumerate(pay_mov_keys):
             if re.search(m, v):
@@ -249,9 +248,9 @@ def expenses(content_block):
         data = []
         for line in payment_moves[key]:
             pattern = msi_pattern if re.search(r"SIN INTERESES", key) else exp_pattern
-            print(pattern)
+            # print(pattern)
             if re.search(pattern, line):
-                print(line)
+                # print(line)
                 data.append(line)
         raw_data[key] = data
     msi_df = pd.DataFrame(columns=["Tipo Tarjeta", "Número Tarjeta", "Fecha", "Descripción", "Monto",
@@ -259,14 +258,11 @@ def expenses(content_block):
     exp_df = pd.DataFrame(columns=["Tipo Tarjeta", "Número Tarjeta", "Fecha Operación", "Fecha Cargo",
                                    "Descripción", "Monto"])
     raw_keys = list(raw_data.keys())
-    print(raw_data)
     for rwk in raw_keys:
         card_mod, card_type, card_number = rwk.split("-")
         content = raw_data[rwk]
-        # print(rwk, content)
 
         if re.search("MESES SIN INTERESES", rwk):
-            # print("MESES SIN INTERESES")
             df = msi_df.copy()
             for s, line in enumerate(content):
                 desc_start = re.search(msi_pattern, line).span()[1]
@@ -274,14 +270,8 @@ def expenses(content_block):
                 description = line[desc_start:desc_end]
                 date = line[:desc_start]
                 stats = line[desc_end:].replace(",", "")
-                pays_steps_pattern = "\d{1,2} de \d{1,2}"
+                pays_steps_pattern = r"\d{1,2} de \d{1,2}"
                 pays_steps = re.search(pays_steps_pattern, stats).span()
-                # try:
-                #     print("A", stats)
-                #     pays_steps = re.search(pays_steps_pattern, stats).span()
-                # except AttributeError as e:
-                #     print("B", stats)
-                #     pays_steps = (29, 37)
                 steps = stats[pays_steps[0]:pays_steps[1]]
                 amounts = stats[:pays_steps[0]].split()
                 rates = stats[pays_steps[1]:]
@@ -302,9 +292,28 @@ def expenses(content_block):
     return exp_df, msi_df
 
 
-universal_tests = pd.read_csv("UniversalState.csv")
-folder_test = "Banks\\BBVA\\Credito"
+"""
 
+if __name__ == "__main__":
+    universal_tests = pd.read_csv("UniversalState.csv")
+    folder_test = "Banks\\UALA\\Credito"
+    files_bank = os.listdir(folder_test)
+    # print(files_bank)
+
+    for k, f in enumerate(files_bank):
+        file = os.path.join(folder_test, f)
+        state_sections, bank_state_blocks = config_state_bank(file)
+        # print(state_sections)
+        if 'DESGLOSE DE MOVIMIENTOS' in state_sections.keys():
+            # print(universal_tests.loc[select_file, "filename"])
+            exp_df, msi_df = expenses(bank_state_blocks)
+            msi_df.to_csv(f"{k}_MSI.csv")
+            exp_df.to_csv(f"{k}_EXP.csv")
+"""
+
+
+
+"""
 
 for select_file in range(universal_tests.shape[0]):
     file = os.path.join(folder_test, universal_tests.loc[select_file, "filename"])
@@ -314,3 +323,6 @@ for select_file in range(universal_tests.shape[0]):
         exp_df, msi_df = expenses(bank_state_blocks)
         msi_df.to_csv(f"{select_file}_MSI.csv")
         exp_df.to_csv(f"{select_file}_EXP.csv")
+
+
+"""
